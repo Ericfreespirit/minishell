@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 17:05:25 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/28 20:35:20 by eriling          ###   ########.fr       */
+/*   Updated: 2021/11/28 23:18:19 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	launch_ast(void)
 			hdoc_backtracking(sg()->node);
 			if (sg()->stop != 1)
 				exec_ast(sg()->node);
-			if (sg()->ret_exit == 131)
-				err_msg("Quitter (core dumped)", 2, 131);
 		}
 		free_ast(sg()->node, 0);
 		dup2(std_out, 1);
@@ -68,6 +66,7 @@ void	ft_signal(void)
 	signal(SIGINT, &handler_sigint);
 	signal(SIGQUIT, &handler_sigquit);
 	signal(SIGCHLD, &handler_sigchild);
+	sg()->quit = 0;
 }
 
 void	ft_readline(char **line)

@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 12:24:55 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/28 19:44:24 by eriling          ###   ########.fr       */
+/*   Updated: 2021/11/28 23:17:27 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,20 @@ void	handler_sigint(int sig)
 
 void	handler_sigquit(int sig)
 {
+	int status;
+	int tmp;
+
 	(void)sig;
-	ft_putstr_fd("\b\b  \b\b", 1);
+	tmp = waitpid(-1, &status, WUNTRACED);
+	if (tmp == -1)
+	{
+		write(1, "\b\b  \b\b", 6);
+		return ;
+	}
+		write(1, "Quit: (core dumped)\n", 21);
+		sg()->quit = 1;
+		sg()->ret_exit = 131;
+
 }
 
 void	ctrl_d(void)
@@ -56,9 +68,4 @@ void	ctrl_d(void)
 	exit(0);
 }
 
-void	ft_signal_ignored(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	// signal(SIGCHLD, NULL);
-}
+

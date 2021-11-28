@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 15:55:10 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/28 20:59:46 by eriling          ###   ########.fr       */
+/*   Updated: 2021/11/28 23:19:28 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,11 @@ void	child_status(int status)
 		write(1, "\n", 1);
 		sg()->ret_exit = 130;
 	}
-	else if (status == 131)
+	else if (status == 131 || sg()->quit == 1)
 		sg()->ret_exit = 131;
 	else if (status == 0)
 		sg()->ret_exit = 0;
+
 }
 
 void	fork_execve(t_ast *node)
@@ -110,25 +111,22 @@ void	fork_execve(t_ast *node)
 		return (err_msg("Error fork", 2, 1));
 	if (pid > 0)
 	{
-		ft_signal_ignored();
-		pid = waitpid(0, &status, WUNTRACED);
-		printf("status: %d\n", status);
+		signal(SIGINT, SIG_IGN);
+		signal(SIGCHLD, NULL);
+		pid = waitpid(0, &status, 0);
 		if (pid == -1)
 			return ;
 		int ret;
 	 if (WIFSIGNALED(status))
 	{
 			ret = WTERMSIG(status);
-			printf("1) ret: %d \n", ret);
 			sg()->ret_exit = WTERMSIG(status);
 	}
 	else if (WIFEXITED(status))
 	{
 		ret = WEXITSTATUS(status);
-		printf("2) ret: %d \n", ret);
 		sg()->ret_exit = WEXITSTATUS(status);
 	}
-		printf("sg: %d\n", sg()->ret_exit);
 		child_status(status);
 	}
 	else if (pid == 0)
