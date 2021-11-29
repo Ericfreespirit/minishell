@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 12:24:55 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/29 10:34:00 by eriling          ###   ########.fr       */
+/*   Updated: 2021/11/29 14:52:27 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,24 @@ void	handler_sigquit(int sig)
 	int	tmp;
 
 	(void)sig;
-	tmp = waitpid(-1, &status, WUNTRACED);
+	tmp = waitpid(sg()->lst_pid, &status, WUNTRACED);
 	if (tmp == -1)
 	{
 		write(1, "\b\b  \b\b", 6);
 		return ;
 	}
 	write(1, "Quit: (core dumped)\n", 21);
+	rl_redisplay();
 	sg()->quit = 1;
 	sg()->ret_exit = 131;
 }
 
 void	ctrl_d(void)
 {
+	int	status;
+
 	write(1, "exit\n", 5);
+	status = sg()->ret_exit;
 	free_program();
-	exit(0);
+	exit(status);
 }

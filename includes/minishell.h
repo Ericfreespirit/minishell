@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 10:16:37 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/28 14:46:03 by eriling          ###   ########.fr       */
+/*   Updated: 2021/11/29 14:50:11 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_data
 	char		**lex_fi;
 	char		**tmp;
 	int			exit;
-	pid_t		pid;
+	int			lst_pid;
 	int			ret_exit;
 	int			in_hdoc;
 	int			in_child;

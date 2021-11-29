@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 17:05:25 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/28 23:18:19 by eriling          ###   ########.fr       */
+/*   Updated: 2021/11/29 14:52:47 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	ft_readline(char **line)
 	*line = readline(sg()->prompt);
 	add_history(*line);
 	rl_redisplay();
+	sg()->lst_pid = 0;
 }
 
 void	launch_minishell(void)

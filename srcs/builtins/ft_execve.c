@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 15:55:10 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/29 12:43:45 by eriling          ###   ########.fr       */
+/*   Updated: 2021/11/29 14:51:25 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	fork_execve(t_ast *node)
 	int		status;
 
 	pid = fork();
+	sg()->lst_pid = pid;
 	if (pid < 0)
 		return (err_msg("Error fork", 2, 1));
 	if (pid > 0)
