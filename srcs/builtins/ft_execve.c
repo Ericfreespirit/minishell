@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 15:55:10 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/28 23:19:28 by eriling          ###   ########.fr       */
+/*   Updated: 2021/11/29 12:43:45 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void	child_status(int status)
 		sg()->ret_exit = 131;
 	else if (status == 0)
 		sg()->ret_exit = 0;
-
 }
 
 void	fork_execve(t_ast *node)
@@ -111,28 +110,17 @@ void	fork_execve(t_ast *node)
 		return (err_msg("Error fork", 2, 1));
 	if (pid > 0)
 	{
-		signal(SIGINT, SIG_IGN);
 		signal(SIGCHLD, NULL);
-		pid = waitpid(0, &status, 0);
+		signal(SIGINT, SIG_IGN);
+		pid = waitpid(pid, &status, WUNTRACED);
 		if (pid == -1)
 			return ;
-		int ret;
-	 if (WIFSIGNALED(status))
-	{
-			ret = WTERMSIG(status);
+		if (WIFSIGNALED(status))
 			sg()->ret_exit = WTERMSIG(status);
-	}
-	else if (WIFEXITED(status))
-	{
-		ret = WEXITSTATUS(status);
-		sg()->ret_exit = WEXITSTATUS(status);
-	}
+		else if (WIFEXITED(status))
+			sg()->ret_exit = WEXITSTATUS(status);
 		child_status(status);
 	}
 	else if (pid == 0)
-	{
-		signal(SIGINT, SIG_DFL);
-		signal(SIGQUIT, SIG_DFL);
 		ft_execve(node->arg, sg()->env);
-	}
 }
