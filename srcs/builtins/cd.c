@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 11:33:43 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/03 15:38:19 by eriling          ###   ########.fr       */
+/*   Updated: 2021/11/29 16:23:58 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,13 @@ void	update_pwd(char ***envp, char *oldpwd)
 int	ft_cwd_onearg(char **arg, char *home, int cwd)
 {
 	char	*path;
+	struct stat buff;
 
+	//check path exist
+	
+	// printf("[%lu]\n", buff.st_dev);
+	if(stat(arg[1], &buff) == -1 || buff.st_dev == 0)
+		return (-7);
 	if (*(arg[1]) == '~')
 	{
 		if (home == NULL)
@@ -53,7 +59,9 @@ int	ft_cwd(char **arg, char ***envp)
 	if (i == 1 && home == NULL)
 		sg()->ret_exit = 1;
 	else if (i == 1 && home != NULL)
+	{
 		cwd = chdir(home);
+	}
 	else if (i == 2)
 		cwd = ft_cwd_onearg(arg, home, cwd);
 	else if (i > 2)
@@ -100,5 +108,7 @@ int	cd(char **arg, char ***envp)
 		err_msg(strerror(errno), 2, 1);
 	else if (ret == -2)
 		err_msg("cd: string not in pwd", 2, 1);
+	else if(ret == -7)
+		err_msg("erreur de détermination du répertoire actuel", 2, 0);
 	return (1);
 }

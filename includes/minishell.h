@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 10:16:37 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/29 14:50:11 by eriling          ###   ########.fr       */
+/*   Updated: 2021/11/29 16:13:17 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/errno.h>
+# include <sys/stat.h>
 # include	"../libft/libft.h"
 # include	<readline/readline.h>
 # include	<readline/history.h>
