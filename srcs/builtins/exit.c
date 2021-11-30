@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/20 15:59:16 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/29 15:46:38 by eriling          ###   ########.fr       */
+/*   Updated: 2021/11/30 14:20:25 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,14 @@ void	free_exit(int statut, int error)
 	exit(statut);
 }
 
-
-int	ft_check_overflow (char *str)
+int	ft_check_overflow(char *str)
 {
 	int	i;
 
 	i = 0;
 	if (str[0] == '-')
 		i++;
-	while(str[i])
+	while (str[i])
 		i++;
 	if (i >= 20)
 		return (1);
@@ -68,7 +67,7 @@ void	ft_exit_status(t_ast *node)
 	{
 		if (ft_check_overflow(node->arg[1]) == 1)
 		{
-			free_exit(2 ,2);
+			free_exit(2, 2);
 			return ;
 		}
 		statut = ft_atoi(node->arg[1]);
