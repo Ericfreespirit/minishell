@@ -6,22 +6,11 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 10:18:05 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/27 19:58:58 by eriling          ###   ########.fr       */
+/*   Updated: 2021/12/01 09:11:10 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	prompt(size_t len, t_data *data)
-{
-	char	*cwd;
-
-	cwd = getenv("PWD");
-	while (len > 0 && cwd[len] != '/')
-		len--;
-	data->prompt = ft_strjoin(&cwd[len + 1], "> ");
-	return (0);
-}
 
 int	malloc_envp(char ***envp)
 {
@@ -60,8 +49,7 @@ int	main(int ac, char **av, char **envp)
 	(void)av;
 	status = 0;
 	sg()->str = NULL;
-	if (prompt(ft_strlen(getenv("PWD")), sg()))
-		return (str_error("Error prompt", 2, 1));
+	sg()->prompt = "minishell> ";
 	sg()->env = envp;
 	if (malloc_envp(&(sg()->env)) == 1)
 		return (str_error("Error malloc", 2, 1));

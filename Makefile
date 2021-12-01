@@ -6,15 +6,15 @@
 #    By: eriling <eriling@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/10 13:10:02 by eriling           #+#    #+#              #
-#    Updated: 2021/11/25 08:56:30 by eriling          ###   ########.fr        #
+#    Updated: 2021/12/01 09:03:29 by eriling          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = clang
 HEAD = -Iincludes -Ilibft
-CFLAGS = -Wall -Wextra -Werror $(DEBUG) -g3
-# DEBUG = -fsanitize=address
+CFLAGS = -Wall -Wextra $(DEBUG) -g3
+DEBUG = -fsanitize=address
 
 FILES = main.c \
 	pwd.c \

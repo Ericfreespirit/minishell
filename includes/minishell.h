@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 10:16:37 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/29 16:13:17 by eriling          ###   ########.fr       */
+/*   Updated: 2021/12/01 09:09:53 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int		quit_hdoc(t_redir *redir, char *str, int ret);
 void	free_exit(int statut, int error);
 t_data	*sg(void);
 
-int		prompt(size_t len, t_data *data);
+int		prompt(void);
 int		ft_findchar(const char c, char *tab);
 int		var(char **line, size_t *i, size_t *len, t_data *data);
 char	*set_env_var(char **line, int i, int n, t_data *data);

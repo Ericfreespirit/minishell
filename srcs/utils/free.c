@@ -6,7 +6,7 @@
 /*   By: eriling <eriling@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 16:04:38 by eriling           #+#    #+#             */
-/*   Updated: 2021/11/25 14:38:52 by eriling          ###   ########.fr       */
+/*   Updated: 2021/12/01 09:11:54 by eriling          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	free_program(void)
 	if (sg()->str != NULL)
 		free(sg()->str);
 	free_envp(sg()->env);
-	free(sg()->prompt);
 	free(sg());
 }
 
